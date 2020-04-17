@@ -2,7 +2,8 @@
   <div id="app">
     <Navbar />
     <div class="container">
-      <Users />
+      <Search />
+      <Users :users="users" :loading="loading" />
     </div>
   </div>
 </template>
@@ -10,16 +11,53 @@
 <script>
 import Navbar from '@/components/layout/Navbar.vue'
 import Users from '@/components/users/Users.vue'
+import Search from '@/components/users/Search.vue'
+
+import EventService from '@/services/UserService.js'
+import { eventBus } from '@/main.js'
 
 export default {
   components: {
     Navbar,
-    Users
+    Users,
+    Search
   },
   data() {
     return {
-      name: 'John Doe'
+      loading: false,
+      users: [],
+      searchText: ''
     }
+  },
+  methods: {
+    searchUsers(searchText) {
+      this.loading = true
+      EventService.getUser(searchText)
+        .then(response => {
+          this.users = response.data.items
+          this.loading = false
+        })
+        .catch(error => {
+          console.log('There was an error : ', error.response)
+        })
+    }
+  },
+  // created() {
+  //   this.loading = true
+  //   EventService.getUsers()
+  //     .then(response => {
+  //       this.users = response.data
+  //       this.loading = false
+  //     })
+  //     .catch(error => {
+  //       console.log('There was an error : ', error.response)
+  //     })
+  // },
+  mounted() {
+    eventBus.$on('search-submitted', searchText => {
+      this.searchText = searchText
+      this.searchUsers(searchText)
+    })
   }
 }
 </script>
