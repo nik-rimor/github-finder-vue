@@ -2,44 +2,44 @@
   <div id="app">
     <Navbar />
     <div class="container">
-      <Search />
-      <Users :users="users" :loading="loading" />
+      <BaseAlert v-if="handleAlert" :alertType="alertState.type">
+        {{ alertState.message }}
+      </BaseAlert>
+      <!-- Display routed pages below -->
+      <router-view />
     </div>
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/layout/Navbar.vue'
-import Users from '@/components/users/Users.vue'
-import Search from '@/components/users/Search.vue'
-
-import EventService from '@/services/UserService.js'
 import { eventBus } from '@/main.js'
 
 export default {
   components: {
-    Navbar,
-    Users,
-    Search
+    Navbar
   },
   data() {
     return {
-      loading: false,
-      users: [],
-      searchText: ''
+      alertState: null
     }
   },
   methods: {
-    searchUsers(searchText) {
-      this.loading = true
-      EventService.getUser(searchText)
-        .then(response => {
-          this.users = response.data.items
-          this.loading = false
-        })
-        .catch(error => {
-          console.log('There was an error : ', error.response)
-        })
+    setClearAlertTimer() {
+      var v = this
+      setTimeout(() => {
+        v.alertState = null
+      }, 4000)
+    }
+  },
+  computed: {
+    handleAlert() {
+      if (this.alertState != null) {
+        this.setClearAlertTimer()
+        return true
+      } else {
+        return false
+      }
     }
   },
   // created() {
@@ -54,9 +54,8 @@ export default {
   //     })
   // },
   mounted() {
-    eventBus.$on('search-submitted', searchText => {
-      this.searchText = searchText
-      this.searchUsers(searchText)
+    eventBus.$on('alert-signal', alertData => {
+      this.alertState = alertData
     })
   }
 }
