@@ -6,7 +6,9 @@
         {{ alertState.message }}
       </BaseAlert>
       <!-- Display routed pages below -->
-      <router-view />
+      <keep-alive>
+        <router-view :key="$route.fullPath" />
+      </keep-alive>
     </div>
   </div>
 </template>

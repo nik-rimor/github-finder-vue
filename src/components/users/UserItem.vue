@@ -8,7 +8,11 @@
     />
     <h3>{{ user.login }}</h3>
     <div>
-      <a class="btn btn-dark btn-sm my-1" :href="user.html_url">More</a>
+      <router-link
+        class="btn btn-dark btn-sm my-1"
+        :to="{ name: 'user-page', params: { id: user.login } }"
+        >More</router-link
+      >
     </div>
   </div>
 </template>

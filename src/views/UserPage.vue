@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>This is the GitHub user : {{ id }}</div>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ export default {
     id: [String, Number],
     data() {
       return {
-        user: value
+        user: null
       }
     }
   }
