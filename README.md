@@ -4,7 +4,7 @@ GitHub finder project, inspired from Brad Traversy's React course project on Ude
 
 ### Note:
 
-In order to run tyou should provide a local .env.lcal file with your github API keys to the following variables:
+In order to run the qpp localy you should provide a local .env.local file at the root folder with your github API keys to the following variables:
 VUE_APP_GITHUB_CLIENT_ID='your GitHub API client id'
 VUE_APP_GITHUB_CLIENT_SECRET='your GitHub API client secret'
 
