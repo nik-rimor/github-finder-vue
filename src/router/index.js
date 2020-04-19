@@ -14,7 +14,7 @@ const routes = [
     component: UserList
   },
   {
-    path: '/user/:id',
+    path: '/user/:username',
     name: 'user-page',
     component: UserPage,
     props: true

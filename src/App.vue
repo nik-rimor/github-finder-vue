@@ -68,7 +68,7 @@ export default {
 
 /* Global Styles */
 :root {
-  --primary-color: #dc3545;
+  --primary-color: #015353;
   --dark-color: #333333;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
@@ -180,6 +180,10 @@ img {
   padding: 1rem;
   border: #ccc 1px dotted;
   margin: 0.7rem 0;
+}
+
+.-shadow {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.13);
 }
 
 /* List */

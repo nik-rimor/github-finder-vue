@@ -1,5 +1,5 @@
 <template>
-  <div class="card text-center">
+  <div class="card text-center -shadow">
     <img
       :src="user.avatar_url"
       :alt="`${user.login} picture`"
@@ -10,7 +10,7 @@
     <div>
       <router-link
         class="btn btn-dark btn-sm my-1"
-        :to="{ name: 'user-page', params: { id: user.login } }"
+        :to="{ name: 'user-page', params: { username: user.login } }"
         >More</router-link
       >
     </div>

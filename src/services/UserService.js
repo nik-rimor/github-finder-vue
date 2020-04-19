@@ -10,14 +10,22 @@ const apiClient = axios.create({
 })
 
 export default {
-  getUsers() {
+  // get a single user by user login name
+  getUser(username) {
     return apiClient.get(
-      `/users?client_id=${process.env.VUE_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.VUE_APP_GITHUB_CLIENT_SECRET}`
+      `/users/${username}?client_id=${process.env.VUE_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.VUE_APP_GITHUB_CLIENT_SECRET}`
     )
   },
-  getUser(searchText) {
+  // get an array of users based on search criteria
+  getUsers(searchText) {
     return apiClient.get(
       `/search/users?q=${searchText}&client_id=${process.env.VUE_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.VUE_APP_GITHUB_CLIENT_SECRET}`
+    )
+  },
+  // get a single user's 6 most recent repos
+  getReposByUsername(username) {
+    return apiClient.get(
+      `/users/${username}/repos?per_page=6&sort=created:ascclient_id=${process.env.VUE_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.VUE_APP_GITHUB_CLIENT_SECRET}`
     )
   }
 }

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import EventService from '@/services/UserService.js'
+import UserService from '@/services/UserService.js'
 import Users from '@/components/users/Users.vue'
 import Search from '@/components/users/Search.vue'
 
@@ -28,7 +28,7 @@ export default {
   methods: {
     searchUsers(searchText) {
       this.loading = true
-      EventService.getUser(searchText)
+      UserService.getUsers(searchText)
         .then(response => {
           this.users = response.data.items
           this.loading = false
